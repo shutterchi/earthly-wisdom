@@ -1,0 +1,13 @@
+<!doctype html><meta charset="utf-8"><title>Figma upload helper</title>
+<body style="font-family:system-ui;background:#04091a;color:#eef3f5;padding:24px">
+<p>Temporary helper: sends the map files to Figma. It will be removed shortly.</p>
+<pre id="log"></pre>
+<script>
+// Called from the browser pane: upload(fileName, figmaSubmitUrl)
+async function upload(name, url){
+  const blob = await (await fetch(name)).blob();
+  const fd = new FormData(); fd.append("file", new File([blob], name, { type: "image/svg+xml" }));
+  try { const r = await fetch(url, { method: "POST", body: fd }); return "status " + r.status + " " + (await r.text()).slice(0, 300); }
+  catch (e) { await fetch(url, { method: "POST", body: fd, mode: "no-cors" }); return "sent (no-cors, response hidden)"; }
+}
+</script>
