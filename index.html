@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="ew-build" content="20261120072221">
+<meta name="ew-build" content="20261120073201">
 <title>Earthly Wisdom</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2304091a'/%3E%3Cg transform='translate(14 14) scale(.72)'%3E%3Cpath d='M12.0 17.7 L15.2 16.3 L21.8 20.1 L27.8 20.5 L31.3 22.4 L31.7 26.1 L36.4 27.9 L41.5 30.3 L51.0 29.3 L51.4 27.5 L56.9 24.2 L64.4 23.3 L72.2 26.6 L76.6 30.7 L79.7 30.7 L79.3 35.4 L77.0 41.9 L78.5 45.1 L77.4 54.4 L81.7 54.9 L82.1 57.7 L78.5 62.3 L80.5 64.6 L84.8 69.3 L86.0 73.9 L88.0 76.2 L82.1 79.0 L81.3 83.7 L73.4 82.7 L64.4 80.4 L62.4 74.8 L59.6 74.4 L54.5 77.6 L49.4 75.8 L45.5 72.5 L41.1 71.1 L38.8 66.5 L36.0 60.4 L31.7 59.1 L30.1 61.8 L27.8 59.1 L27.8 56.7 L26.6 56.7 L26.6 52.1 L20.3 47.4 L17.5 43.3 L18.3 40.5 L15.9 38.2 L20.3 34.9 L17.5 33.5 L15.2 27.9 L12.8 24.7 L13.6 22.8Z' fill='%2329e078' stroke='%2329e078' stroke-width='15' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -1182,7 +1182,7 @@ function render(lo){
   // in Pick it the tapped country stays raised; otherwise it snaps back down
   const lu = !liftRec || !liftT ? 0 : ease(le / LIFT_RISE) * (pickSel ? 1 : 1 - snap((le - LIFT_RISE - LIFT_HOLD) / LIFT_SNAP));
   const ga = liftT ? ease(le / LIFT_RISE) : 0;   // how far the green has faded in
-  const dz = liftRec && desatT ? 0.5 * ease((now - desatT) / LIFT_MS) : 0;
+  const dz = 0;   // the other countries keep their colours while one is highlighted
   const bw = k > 2500 ? 1.1 : 0.7;
   if (liftRec && !anim && !interacting){
     const r = proj.rotate(), t = proj.translate();
@@ -2092,7 +2092,7 @@ loadGeo().then(gj => {
 /* Self-update: GitHub Pages lets phones keep an old copy for up to 10 minutes.
    When the app opens or comes back to the front, check for a newer build and load it. */
 (function(){
-  var mine = "20261120072221";
+  var mine = "20261120073201";
   function check(){
     fetch(location.pathname + "?check=" + Date.now(), { cache: "no-store" }).then(function(r){ return r.text(); }).then(function(t){
       var m = t.match(/name="ew-build" content="(\d+)"/);
