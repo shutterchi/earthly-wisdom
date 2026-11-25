@@ -2,6 +2,10 @@
 
 Newest first. Each entry says what changed and where: **web** (the Claude version and toybox.shutterchi.com) and/or **app** (the iPhone and iPad app).
 
+## 2026-11-25 (fourth update)
+
+- **Pick it: circles only for tiny countries on your list** (web, app). Only countries you can actually be asked about with your current region and territory settings get a circle, so territories such as Åland or Bermuda keep their real shape unless territories are turned on. A country gets a circle if it's too small to tap even when zoomed all the way in: 22 countries in the whole world, such as Vatican City, Monaco, Malta, Singapore, Bahrain and the small island nations. The circle is a comfortable tap (44 pt across) at full zoom and stays the same patch of the world at every zoom, so it's smaller when you zoom out. Countries no longer switch between circle and real shape.
+
 ## 2026-11-25 (third update)
 
 - **Pick it: tiny countries are circles that grow with the map** (web, app). A circle is now a fixed patch of the world, so it grows and shrinks with the map like real land. It's sized to be a comfortable tap (44 pt across) when Italy fills the screen. On the wide globe, the circles are small specks and don't get in the way. The countries that get a circle are the 63 that are too small to tap at that zoom, from Vatican City up to Luxembourg and Cape Verde. When you zoom in far enough that a country's real shape is bigger than a tap, the real shape comes back.
