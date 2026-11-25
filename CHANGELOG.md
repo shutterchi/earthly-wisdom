@@ -2,9 +2,13 @@
 
 Newest first. Each entry says what changed and where: **web** (the Claude version and toybox.shutterchi.com) and/or **app** (the iPhone and iPad app).
 
+## 2026-11-25 (third update)
+
+- **Pick it: tiny countries are circles that grow with the map** (web, app). A circle is now a fixed patch of the world, so it grows and shrinks with the map like real land. It's sized to be a comfortable tap (44 pt across) when Italy fills the screen. On the wide globe, the circles are small specks and don't get in the way. The countries that get a circle are the 63 that are too small to tap at that zoom, from Vatican City up to Luxembourg and Cape Verde. When you zoom in far enough that a country's real shape is bigger than a tap, the real shape comes back.
+
 ## 2026-11-25 (second update)
 
-- **Pick it: only really tiny countries become dots** (web, app). Dots are now limited to countries no bigger than Bahrain (about 50 places, such as Vatican City, Monaco, Malta, Singapore and small islands), and only while they're too small on screen to tap. Everything else keeps its real shape, so the globe is no longer covered in dots.
+- **Pick it: only really tiny countries become dots** (web, app). Dots were limited to countries no bigger than Bahrain. (Replaced by the third update.)
 - **Fix: Australia appeared twice** (web, app). Australia's Indian Ocean islands (Christmas and Cocos) share Australia's country code in the map data, so they were counted as a second, tiny "Australia". They're now plain land, and Australia is asked once.
 
 ## 2026-11-25
