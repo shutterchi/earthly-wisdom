@@ -2,6 +2,11 @@
 
 Newest first. Each entry says what changed and where: **web** (the Claude version and toybox.shutterchi.com) and/or **app** (the iPhone and iPad app).
 
+## 2026-11-25 (second update)
+
+- **Pick it: only really tiny countries become dots** (web, app). Dots are now limited to countries no bigger than Bahrain (about 50 places, such as Vatican City, Monaco, Malta, Singapore and small islands), and only while they're too small on screen to tap. Everything else keeps its real shape, so the globe is no longer covered in dots.
+- **Fix: Australia appeared twice** (web, app). Australia's Indian Ocean islands (Christmas and Cocos) share Australia's country code in the map data, so they were counted as a second, tiny "Australia". They're now plain land, and Australia is asked once.
+
 ## 2026-11-25
 
 - **Pick it: tiny countries are now tappable** (web, app). Countries too small to tap on screen, such as Vatican City, Monaco, San Marino and many islands, are shown as round dots about a fingertip wide. A tap anywhere on a dot selects it, and the dot lifts and turns green like any other country. When you zoom in far enough that the real shape is big enough to tap, the dot turns back into the shape.

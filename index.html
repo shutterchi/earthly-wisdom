@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="ew-build" content="20261125191231">
+<meta name="ew-build" content="20261125192249">
 <title>Earthly Wisdom</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2304091a'/%3E%3Cg transform='translate(14 14) scale(.72)'%3E%3Cpath d='M12.0 17.7 L15.2 16.3 L21.8 20.1 L27.8 20.5 L31.3 22.4 L31.7 26.1 L36.4 27.9 L41.5 30.3 L51.0 29.3 L51.4 27.5 L56.9 24.2 L64.4 23.3 L72.2 26.6 L76.6 30.7 L79.7 30.7 L79.3 35.4 L77.0 41.9 L78.5 45.1 L77.4 54.4 L81.7 54.9 L82.1 57.7 L78.5 62.3 L80.5 64.6 L84.8 69.3 L86.0 73.9 L88.0 76.2 L82.1 79.0 L81.3 83.7 L73.4 82.7 L64.4 80.4 L62.4 74.8 L59.6 74.4 L54.5 77.6 L49.4 75.8 L45.5 72.5 L41.1 71.1 L38.8 66.5 L36.0 60.4 L31.7 59.1 L30.1 61.8 L27.8 59.1 L27.8 56.7 L26.6 56.7 L26.6 52.1 L20.3 47.4 L17.5 43.3 L18.3 40.5 L15.9 38.2 L20.3 34.9 L17.5 33.5 L15.2 27.9 L12.8 24.7 L13.6 22.8Z' fill='%2329e078' stroke='%2329e078' stroke-width='15' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -976,6 +976,7 @@ function prepare(gj){
     let id = String(f.properties.id || "").toUpperCase();
     if (id === "KV") id = "XK";
     if (!id || id === "AQ") { f._id = id; continue; }
+    if (byId[id]) { f._id = ""; continue; }   // a second shape with the same code (Australia's Indian Ocean islands): plain land, not a second "Australia"
     f._id = id;
     const canon = CANON[id];
     const name = canon ? canon[0] : (f.properties.name || id);
@@ -1625,9 +1626,19 @@ const LIFT_RISE = 560, LIFT_HOLD = 140, LIFT_SNAP = 350, LIFT_MS = LIFT_RISE + L
 // Which country is lifted: the one you've tapped in Pick it, otherwise the one to name
 // Pick it: countries too small to tap are shown as round dots you can hit with a finger
 const DOT_AREA = 300, DOT_R = 11;
+// size on the sphere (outlines only, each piece measured on its own so a flipped ring can't break it)
+function geoSize(r){
+  if (r._ga == null){
+    const g = r.f.geometry, polys = g.type === "Polygon" ? [g.coordinates] : g.coordinates;
+    r._ga = polys.reduce((t, p) => { const a = d3.geoArea({ type:"Polygon", coordinates:[p[0]] }); return t + Math.min(a, 4*Math.PI - a); }, 0);
+  }
+  return r._ga;
+}
+// only countries no bigger than Bahrain can become dots, and only while they're too small on screen to tap
 function isDot(r){
   if (!isPick() || !visible(r.center)) return false;
-  const ga = r._ga || (r._ga = d3.geoArea(r.f));
+  const max = byId.BH ? geoSize(byId.BH) * 1.001 : 0;
+  const ga = geoSize(r); if (ga > max) return false;
   const k = proj.scale();
   return ga * k * k < DOT_AREA;   // roughly its size on screen, in square points
 }
@@ -2124,7 +2135,7 @@ loadGeo().then(gj => {
 /* Self-update: GitHub Pages lets phones keep an old copy for up to 10 minutes.
    When the app opens or comes back to the front, check for a newer build and load it. */
 (function(){
-  var mine = "20261125191231";
+  var mine = "20261125192249";
   function check(){
     fetch(location.pathname + "?check=" + Date.now(), { cache: "no-store" }).then(function(r){ return r.text(); }).then(function(t){
       var m = t.match(/name="ew-build" content="(\d+)"/);
